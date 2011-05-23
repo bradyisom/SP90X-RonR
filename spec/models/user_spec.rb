@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'digest'
 
 describe User do
   
@@ -16,6 +17,37 @@ describe User do
   
   it "should create a new instance with valid attributes" do
     User.create!(@attr)    
+  end
+  
+  describe "attributes" do
+    before :each do
+      @user = User.create!(@attr)
+    end
+    
+    it "should have a first name attribute" do
+      @user.should respond_to(:first_name)
+    end
+    it "should have a last name attribute" do
+      @user.should respond_to(:last_name)
+    end
+    it "should have a username attribute" do
+      @user.should respond_to(:username)
+    end
+    it "should have an email attribute" do
+      @user.should respond_to(:email)
+    end
+    it "should have a gender attribute" do
+      @user.should respond_to(:gender)
+    end
+    it "should have a password attribute" do
+      @user.should respond_to(:password)
+    end
+    it "should have a password_confirmation attribute" do
+      @user.should respond_to(:password_confirmation)
+    end
+    it "should have an encrypted password attribute" do
+      @user.should respond_to(:encrypted_password)
+    end
   end
 
   describe "validations" do
@@ -127,5 +159,73 @@ describe User do
       test_invalid({ :password_confirmation => 'invalid' })
     end
     
+  end
+  
+  describe "password encryption" do
+    before :each do
+      @user = User.create!(@attr)
+    end
+    
+    it "should set the encrypted password" do
+      @user.encrypted_password.should_not be_blank
+    end
+    
+    describe "has_password? method" do
+      it "should be true if the passwords match" do
+        @user.has_password?(@attr[:password]).should be_true
+      end
+      
+      it "should be false if the passwords don't match" do
+        @user.has_password?("invalid").should be_false
+      end
+    end
+
+    describe "authenticate method" do
+      it "should return nil on username/password mismatch" do
+        invalid = User.authenticate(@attr[:username], "wrongpass")
+        invalid.should be_nil
+      end
+      
+      it "should return nil for a non-existing username" do
+        invalid = User.authenticate("foobar", @attr[:password])
+        invalid.should be_nil        
+      end
+      
+      it "should return the user on username/password match" do
+        valid = User.authenticate(@attr[:username], @attr[:password])
+        valid.should == @user
+      end      
+    end
+    
+  end
+    
+  describe "upgrade from md5 password" do
+    before :each do
+      @md5Password = Digest::MD5.hexdigest(@attr[:password])
+      ActiveRecord::Base.connection.insert("INSERT into users 
+            (id, first_name, last_name, username, gender, email, encrypted_password) 
+            VALUES (999, 'John', 'Doe', 'jdoeold', 'M', 'jdoe@foo.com', '" + 
+              @md5Password + 
+            "')")
+      @user = User.find(999)
+    end
+    
+    it "should not upgrade an old_password when not correct" do
+      @user.salt.should be_blank
+      @user.has_password?("invalid").should be_false
+      @user.salt.should be_blank
+      @user.encrypted_password.should == @md5Password
+    end
+    
+    it "should upgrade an old password when correct" do
+      @user.salt.should be_blank
+      @user.has_password?(@attr[:password]).should be_true
+      @user.salt.should_not be_blank
+      @user.has_password?(@attr[:password]).should be_true
+      
+      @user = User.find(999)
+      @user.salt.should_not be_blank
+      @user.has_password?(@attr[:password]).should be_true
+    end
   end
 end

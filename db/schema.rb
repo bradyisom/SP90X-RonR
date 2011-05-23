@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110512225310) do
+ActiveRecord::Schema.define(:version => 20110523183716) do
 
   create_table "users", :force => true do |t|
     t.string   "first_name",         :limit => 25
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20110512225310) do
     t.string   "gender",             :limit => 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "salt"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
