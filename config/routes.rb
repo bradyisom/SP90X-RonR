@@ -1,5 +1,12 @@
 SP90X::Application.routes.draw do
   resources :users
+  
+  match '/feedback', :to => 'pages#feedback'
+  match '/about', :to => 'pages#about'
+  match '/donate', :to => 'pages#donate'
+  match '/resources', :to => 'pages#resources'
+  
+  root :to => 'pages#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

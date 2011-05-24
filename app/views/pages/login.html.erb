@@ -1,0 +1,16 @@
+<h1>Login</h1>
+
+<%= render 'shared/error_messages'%>
+
+<% form_for%
+<?php
+$hidden = array( 'return_url' => $return_url);
+echo form_open('login/validate', '', $hidden);
+echo form_label('Username:', 'username');
+echo form_input('username', $username);
+echo form_label('Password:', 'password');
+echo form_password('password', '');
+echo form_submit('submit', 'Login');
+echo anchor('login/registration', 'Register', array('class' => 'button', 'style' => 'float:right;'));
+echo form_close();
+?>

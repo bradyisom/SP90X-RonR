@@ -9,6 +9,8 @@ gem 'rails', '3.0.7'
 gem 'sqlite3'
 gem 'sqlite3-ruby', :group => :development
 
+gem 'sass'
+
 group :development do
   gem 'rspec-rails'
   gem 'annotate-models'
