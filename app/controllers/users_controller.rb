@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
   
   def new
-
+    @title = "Register"
   end
   
   def create

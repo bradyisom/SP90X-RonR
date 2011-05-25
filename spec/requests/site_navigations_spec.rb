@@ -27,6 +27,16 @@ describe "SiteNavigations" do
     response.should have_selector('title', :content => "Resources")
   end
   
+  it "should have a Login page at '/login'" do
+    get '/login'
+    response.should have_selector('title', :content => "Login")
+  end
+  
+  it "should have a Register page at '/register'" do
+    get '/register'
+    response.should have_selector('title', :content => "Register")
+  end
+  
   it "should have the right links on the site header" do
     visit root_path
     
@@ -38,5 +48,9 @@ describe "SiteNavigations" do
     response.should have_selector('title', :content => "Donate")
     click_link "Resources"
     response.should have_selector('title', :content => "Resources")
+    click_link "Login"
+    response.should have_selector('title', :content => "Login")
+    click_link "Register"
+    response.should have_selector('title', :content => "Register")
   end
 end

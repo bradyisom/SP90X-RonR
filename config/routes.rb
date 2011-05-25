@@ -1,10 +1,15 @@
 SP90X::Application.routes.draw do
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
   
   match '/feedback', :to => 'pages#feedback'
   match '/about', :to => 'pages#about'
   match '/donate', :to => 'pages#donate'
   match '/resources', :to => 'pages#resources'
+  
+  match '/register', :to => 'users#new'
+  match '/login', :to => 'sessions#new'
+  match '/logout', :to => 'sessions#destroy'
   
   root :to => 'pages#home'
 
