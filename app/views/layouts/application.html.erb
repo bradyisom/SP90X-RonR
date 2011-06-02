@@ -52,6 +52,11 @@
     </div>
 	
 	<div class="copy">
+		<section class="flash">
+			<% flash.each do |key, value| %>
+				<%= content_tag(:div, value, :class => "flash #{key}")%>
+			<% end %>
+		</section>
 		<%= yield %>
 	</div>
 

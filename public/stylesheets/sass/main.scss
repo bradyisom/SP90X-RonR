@@ -2,7 +2,14 @@ $app-background: #555;
 $app-light: #999;
 $app-dark: #111;
 $app-gray: #ccc;
- 
+$error-color: red; 
+$success-color: green; 
+
+@mixin rounded($radius: 0.5em) {
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+}
 
 body, html {
     font-family: Helvitica, Arial;
@@ -263,6 +270,10 @@ a.button:hover {
     background-color:#555;
 }
 
+.field_with_errors input {
+  border: solid 2px $error-color;
+}
+
 .column-1,
 .column-2 {
     float: left;
@@ -330,10 +341,28 @@ a.button:hover {
 }
 
 .error {
-    color: red;
+    color: $error-color;
 }
 .message {
-    color: green;
+    color: $success-color;
+}
+
+div.flash {
+  margin-bottom: 1em;
+  padding: 20px;
+  @include rounded;
+  background-color: white;
+  border: solid 2px transparent;
+}
+.flash {
+  .success {
+    border-color: $success-color;
+    color: $success-color;
+  }
+  .error {
+    border-color: $error-color;
+    color: $error-color;
+  }
 }
 
 .copy {

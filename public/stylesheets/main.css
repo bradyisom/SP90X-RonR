@@ -208,6 +208,9 @@ input[type=submit]:hover,
 a.button:hover {
   background-color: #555; }
 
+.field_with_errors input {
+  border: solid 2px red; }
+
 .column-1,
 .column-2 {
   float: left;
@@ -267,6 +270,22 @@ a.button:hover {
 
 .message {
   color: green; }
+
+div.flash {
+  margin-bottom: 1em;
+  padding: 20px;
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  border-radius: 0.5em;
+  background-color: white;
+  border: solid 2px transparent; }
+
+.flash .success {
+  border-color: green;
+  color: green; }
+.flash .error {
+  border-color: red;
+  color: red; }
 
 .copy {
   margin: auto;

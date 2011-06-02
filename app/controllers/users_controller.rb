@@ -13,7 +13,14 @@ class UsersController < ApplicationController
   end
   
   def create
-    
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:success] = "Registration Successful! Welcome to SP90X!"
+      redirect_to @user
+    else
+      @title = "Register"
+      render 'new'
+    end
   end
   
   def edit
