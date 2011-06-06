@@ -286,6 +286,9 @@ div.flash {
 .flash .error {
   border-color: red;
   color: red; }
+.flash .notice {
+  border-color: #555555;
+  color: #555555; }
 
 .copy {
   margin: auto;

@@ -1,5 +1,5 @@
 SP90X::Application.routes.draw do
-  resources :users
+  resources :users, :except => [:index, :destroy]
   resources :sessions, :only => [:new, :create, :destroy]
   
   match '/feedback', :to => 'pages#feedback'

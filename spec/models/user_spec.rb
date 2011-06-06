@@ -161,6 +161,18 @@ describe User do
     
   end
   
+  describe "display name" do
+    before :each do
+      @user = User.create!(@attr)
+    end
+    it "should have the display_name property" do
+      @user.should respond_to(:display_name)
+    end
+    it "should have the correct display name" do
+      @user.display_name.should match("#{@user.first_name} #{@user.last_name}")
+    end
+  end
+  
   describe "password encryption" do
     before :each do
       @user = User.create!(@attr)

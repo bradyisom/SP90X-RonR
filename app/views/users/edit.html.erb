@@ -1,0 +1,41 @@
+<h1>Edit Profile - <%="#{@user.display_name}"%></h1>
+
+<%= form_for(@user) do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<div style="overflow:auto">
+		<div class="column-1">
+		    <fieldset>
+		        <legend>Personal Info</legend>
+		        <div class="fieldset-content">
+				<%= f.label :first_name%>
+				<%= f.text_field :first_name%>
+				<%= f.label :last_name%>
+				<%= f.text_field :last_name%>
+				<%= f.label :email%>
+				<%= f.text_field :email%>
+		        <p>
+					<%= f.label :gender, 'Male', :value => 'M'%>
+					<%= f.radio_button :gender, 'M', :checked => true %>
+					<%= f.label :gender, 'Female', :value => 'F'%>
+					<%= f.radio_button :gender, 'F' %>
+				</p>
+		        </div>
+		    </fieldset>
+		</div>
+		<div class="column-2">
+		    <fieldset>
+		        <legend>Account Info</legend>
+		        <div class="fieldset-content">
+				<%= f.label :username%>
+				<%= f.text_field :username, :readonly => true%>
+				<%= f.label :password%>
+				<%= f.password_field :password%>
+				<%= f.label :password_confirmation%>
+				<%= f.password_field :password_confirmation%>
+		        <p>&nbsp;</p>
+		        </div>
+		    </fieldset>
+		</div>
+	</div>
+	<%= f.submit 'Update' %>
+<% end %>
