@@ -45,13 +45,19 @@
                 </ul>
             </li>
 		<?php else: ?>  -->
+
+		<% if logged_in? %>
+            <li><%= link_to("#{current_user.display_name}", user_path(current_user)) %></li>
+            <li><%= link_to('Logout', logout_path) %></li>
+		<% else %>
             <li><%= link_to('Login', login_path) %></li>
             <li><%= link_to('Register', register_path) %></li>
+		<% end %>
 <!--         <?php endif; ?> -->
         </ul>
     </div>
 	
-	<div class="copy">
+	<div class="copy" <%= "style='width:#{@content_width}px'" if !@content_width.blank? %>>
 		<section class="flash">
 			<% flash.each do |key, value| %>
 				<%= content_tag(:div, value, :class => "flash #{key}")%>

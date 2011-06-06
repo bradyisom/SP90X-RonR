@@ -4,6 +4,7 @@ $app-dark: #111;
 $app-gray: #ccc;
 $error-color: red; 
 $success-color: green; 
+$notice-color: $app-background; 
 
 @mixin rounded($radius: 0.5em) {
     -moz-border-radius: $radius;
@@ -362,6 +363,10 @@ div.flash {
   .error {
     border-color: $error-color;
     color: $error-color;
+  }
+  .notice {
+    border-color: $notice-color;
+    color: $notice-color;
   }
 }
 
