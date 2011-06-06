@@ -242,3 +242,15 @@ REQUESTING PAGE: POST /users with {"utf8"=>"\xE2\x9C\x93", "user"=>{"first_name"
 REQUESTING PAGE: GET /register with {} and HTTP headers {}
 REQUESTING PAGE: POST /users with {"utf8"=>"\xE2\x9C\x93", "user"=>{"first_name"=>"John", "last_name"=>"Doe", "email"=>"johndoe@mailinator.com", "gender"=>"M", "username"=>"johndoe", "password"=>"foobar", "password_confirmation"=>"foobar"}, "commit"=>"Create Account"} and HTTP headers {"HTTP_REFERER"=>"/register"}
 REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+REQUESTING PAGE: GET /about with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+REQUESTING PAGE: GET /feedback with {} and HTTP headers {"HTTP_REFERER"=>"/about"}
+REQUESTING PAGE: GET /donate with {} and HTTP headers {"HTTP_REFERER"=>"/feedback"}
+REQUESTING PAGE: GET /resources with {} and HTTP headers {"HTTP_REFERER"=>"/donate"}
+REQUESTING PAGE: GET /login with {} and HTTP headers {"HTTP_REFERER"=>"/resources"}
+REQUESTING PAGE: GET /register with {} and HTTP headers {"HTTP_REFERER"=>"/login"}
+REQUESTING PAGE: GET /register with {} and HTTP headers {}
+REQUESTING PAGE: POST /users with {"commit"=>"Create Account", "utf8"=>"✓", "user"=>{"password_confirmation"=>"", "username"=>"", "gender"=>"M", "last_name"=>"", "password"=>"", "email"=>"", "first_name"=>""}} and HTTP headers {"HTTP_REFERER"=>"/register"}
+REQUESTING PAGE: GET /register with {} and HTTP headers {}
+REQUESTING PAGE: POST /users with {"commit"=>"Create Account", "utf8"=>"✓", "user"=>{"password_confirmation"=>"foobar", "username"=>"johndoe", "gender"=>"M", "last_name"=>"Doe", "password"=>"foobar", "email"=>"johndoe@mailinator.com", "first_name"=>"John"}} and HTTP headers {"HTTP_REFERER"=>"/register"}
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
